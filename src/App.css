@@ -164,7 +164,7 @@ html, body, #root, #app {
 }
 
 #app .timelineOut {
-  width: 800px;
+  /* width: 800px; */
   height: 50px;
   border-right: 2px solid black;
   background-color: silver;

@@ -4,7 +4,7 @@ import * as tf from "@tensorflow/tfjs";
 
 import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import Webcam from "react-webcam";
-import { drawMesh } from "./utilities";
+import { drawMesh, drawFrame } from "./utilities";
 
 // Import images
 import play from './play.png';
@@ -20,12 +20,17 @@ function App() {
   const [isPlayed, setPlay] = useState(false);
   const [isPaused, setPause] = useState(false);
   const [isRecorded, setRecord] = useState(false);
+  const [timelineWidth, setTimelineWidth] = useState('0px');
+  const [timelinePosition, setTimelinePosition] = useState('0px');
+  const [frame, setFrame] = useState(-1);
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const loadingRef = useRef(null);
   const recordRef = useRef(false);
   const recRef = useRef(false);
+  const timelineRef = useRef(null);
+  const previewRef = useRef(null);
 
   //  Load posenet
   const runFacemesh = async () => {
@@ -127,18 +132,26 @@ function App() {
       setRecord(false);
       recordRef.current = false;
       recRef.current.style.display = 'none';
+      setTimelineWidth(data.length + "px");
     }
   }
 
-  const [timelineWidth, setTimelineWidth] = useState('0px');
-  const timelineRef = useRef(null);
-  
   const handleTimeline = (e) => {
-    
-    let size = e.clientX - timelineRef.current.getBoundingClientRect().left;
-    console.log(size + "px")
-    setTimelineWidth(size + "px");
+    // Update timeline position
+    let size = Math.floor(e.clientX - timelineRef.current.getBoundingClientRect().left);
+    setTimelinePosition(size + "px");
     // let pct = Math.floor((size / timelineRef.current.clientWidth) * 100);
+
+    // Change preview frame
+    if (data.length > size) {
+      const videoWidth = webcamRef.current.video.videoWidth;
+      const videoHeight = webcamRef.current.video.videoHeight;
+      previewRef.current.width = videoWidth;
+      previewRef.current.height = videoHeight;
+      const ctx = previewRef.current.getContext("2d");
+      drawFrame(data[size], ctx);
+    }
+    
   }
 
   return (
@@ -178,7 +191,7 @@ function App() {
 
         <div className="section square">
           <div className="title center">Preview</div>
-          <canvas className="view result"/>
+          <canvas ref={previewRef} className="view result"/>
           <div className="controls center"></div>
         </div>
 
@@ -188,8 +201,8 @@ function App() {
             <div className="piste">
               <div className="pisteName center">Piste 1</div>
               <div className="timeline">
-                <div ref={timelineRef} className="timelineOut" onClick={(e) => handleTimeline(e)}>
-                  <div className="timelineIn" style={{width: timelineWidth}}></div>
+                <div ref={timelineRef} className="timelineOut" onClick={(e) => handleTimeline(e)} style={{width: timelineWidth}}>
+                  <div className="timelineIn" style={{width: timelinePosition}}></div>
                 </div>
               </div>
             </div>
