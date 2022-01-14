@@ -3,15 +3,16 @@ html, body, #root, #app {
   height: max(800px, 100%);
 }
 
-#app {
-  background-color: rgba(41,41,41,255);
-}
-
 .center {
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
+}
+
+/* App */
+#app {
+  background-color: rgba(41,41,41,255);
 }
 
 #app .application {
@@ -23,7 +24,7 @@ html, body, #root, #app {
 #app .applicationTitle {
   width: 600px;
   height: 35px;
-  background-color: royalblue;
+  background-color: #5c5656;
   color: white;
   font-size: 25px;
   margin-bottom: 10px;
@@ -50,7 +51,6 @@ html, body, #root, #app {
 #app .title {
   width: 100%;
   height: 25px;
-  background-color: royalblue;
   color: white;
   margin-bottom: 5px;
 }
@@ -112,15 +112,35 @@ html, body, #root, #app {
   width: 20px;
 }
 
-#app .simulation {
+/* Webcam */
+#app .webcam .title {
+  background-color: #cf4040;
+}
+
+/* Simulation */
+#app .simulation .title {
+  background-color: blueviolet;
+}
+
+#app .simulation .view {
   background-color: black;
 }
 
-#app .result {
+/* Preview */
+#app .preview .title {
+  background-color: darkgoldenrod;
+}
+
+#app .preview .view {
   background-color: #403d3d;
 }
 
-#app .timelines {
+/* Timelines */
+#app .timelines .title {
+  background-color: #747406;
+}
+
+#app .timelines .view {
   background-color: #403d3d;
 }
 
@@ -164,7 +184,6 @@ html, body, #root, #app {
 }
 
 #app .timelineOut {
-  /* width: 800px; */
   height: 50px;
   border-right: 2px solid black;
   background-color: silver;

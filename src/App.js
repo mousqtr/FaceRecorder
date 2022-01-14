@@ -14,6 +14,7 @@ import rolling from './rolling.gif';
 
 var data = [];
 var interval;
+var intervalPreview;
 
 function App() {
 
@@ -21,8 +22,10 @@ function App() {
   const [isPaused, setPause] = useState(false);
   const [isRecorded, setRecord] = useState(false);
   const [timelineWidth, setTimelineWidth] = useState('0px');
-  const [timelinePosition, setTimelinePosition] = useState('0px');
+  const [timelinePosition, setTimelinePosition] = useState(0);
   const [frame, setFrame] = useState(-1);
+  const [isPreviewPlayed, setPreviewPlay] = useState(false);
+  const [isPreviewPaused, setPreviewPause] = useState(false);
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
@@ -137,9 +140,10 @@ function App() {
   }
 
   const handleTimeline = (e) => {
+    
     // Update timeline position
     let size = Math.floor(e.clientX - timelineRef.current.getBoundingClientRect().left);
-    setTimelinePosition(size + "px");
+    setTimelinePosition(size);
     // let pct = Math.floor((size / timelineRef.current.clientWidth) * 100);
 
     // Change preview frame
@@ -154,20 +158,54 @@ function App() {
     
   }
 
+  const handlePreviewPlay = () => {
+    if (!isPreviewPlayed) {
+      setPreviewPause(false);
+      setPreviewPlay(true);
+      console.log(timelinePosition);
+      let index = timelinePosition;
+      intervalPreview = setInterval(() => {
+        if (data.length > index) {
+          setTimelinePosition(index);
+
+          const videoWidth = webcamRef.current.video.videoWidth;
+          const videoHeight = webcamRef.current.video.videoHeight;
+          previewRef.current.width = videoWidth;
+          previewRef.current.height = videoHeight;
+          const ctx = previewRef.current.getContext("2d");
+          drawFrame(data[index], ctx);
+
+          index++;
+        }
+      }, 10);
+    }
+  }
+
+  const handlePreviewPause = () => {
+    if (!isPreviewPaused) {
+      setPreviewPlay(false);
+      setPreviewPause(true);
+      clearInterval(intervalPreview);
+    }
+  }
+
   return (
     <div id="app" className="center">
 
-      <div className="applicationTitle center">FACE RECOGNITION</div>
+      <div className="applicationTitle center">
+        FACE RECOGNITION
+      </div>
+
       <div className="application">
-        <div className="section square">
+        <div className="section square webcam">
           <div className="title center">Webcam</div>
           <Webcam ref={webcamRef} className="view"/>
           <div className="controls center"></div>
         </div>
         
-        <div className="section square">
+        <div className="section square simulation">
           <div className="title center">Simulation</div>
-          <canvas ref={canvasRef} className="view simulation"/>
+          <canvas ref={canvasRef} className="view"/>
           <div className="controls center">
             <button
               className={[(isPlayed) ? "btnClicked" : "btnNotClicked", "controlsBtn center"].join(' ')}
@@ -189,27 +227,38 @@ function App() {
           <div ref={recRef} className="redPoint"></div>
         </div>
 
-        <div className="section square">
+        <div className="section square preview">
           <div className="title center">Preview</div>
-          <canvas ref={previewRef} className="view result"/>
-          <div className="controls center"></div>
+          <canvas ref={previewRef} className="view"/>
+          <div className="controls center">
+          <button
+              className={[(isPreviewPlayed) ? "btnClicked" : "btnNotClicked", "controlsBtn center"].join(' ')}
+              onClick={handlePreviewPlay}>
+                <img src={play} type="button" alt="play" />
+            </button>
+            <button
+              className={[(isPreviewPaused) ? "btnClicked" : "btnNotClicked", "controlsBtn center"].join(' ')}
+              onClick={handlePreviewPause}>
+                <img src={pause} type="button" alt="pause" />
+            </button>
+          </div>
         </div>
 
-        <div className="section rectangle">
+        <div className="section rectangle timelines">
           <div className="title center">Timelines</div>
-          <div className="view timelines">
+          <div className="view">
             <div className="piste">
               <div className="pisteName center">Piste 1</div>
               <div className="timeline">
                 <div ref={timelineRef} className="timelineOut" onClick={(e) => handleTimeline(e)} style={{width: timelineWidth}}>
-                  <div className="timelineIn" style={{width: timelinePosition}}></div>
+                  <div className="timelineIn" style={{width: timelinePosition+'px'}}></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
+
     </div>
   );
 }
