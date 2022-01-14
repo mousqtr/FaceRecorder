@@ -1,6 +1,6 @@
 html, body, #root, #app {
   width: max(1240px, 100%);
-  height: max(690px, 100%);
+  height: max(800px, 100%);
 }
 
 #app {
@@ -15,6 +15,7 @@ html, body, #root, #app {
 
 #app .applicationTitle {
   width: 600px;
+  height: 35px;
   background-color: royalblue;
   color: white;
   font-size: 25px;
@@ -69,15 +70,27 @@ html, body, #root, #app {
   height: 36px;
   border-radius: 25%;
   cursor: pointer;
+  margin-left: 5px;
 }
 
-#app .rolling{
+#app .rolling {
   width: 50px;
   height: 50px;
   position: absolute;
   top: 140px;
   left: 175px;
   display: none;
+}
+
+#app .redPoint {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 36px;
+  right: 6px;
+  display: none;
+  background-color: red;
+  border-radius: 50%;
 }
 
 

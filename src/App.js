@@ -9,6 +9,7 @@ import { drawMesh } from "./utilities";
 // Import images
 import play from './play.png';
 import pause from './pause.png';
+import record from './record.png';
 import rolling from './rolling.gif';
 
 var data = [];
@@ -18,21 +19,18 @@ function App() {
 
   const [isPlayed, setPlay] = useState(false);
   const [isPaused, setPause] = useState(false);
-
-
-  const [isStarted, setStart] = useState(false);
-  
-  const [isInProgress, setInProgress] = useState(false);
+  const [isRecorded, setRecord] = useState(false);
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const loadingRef = useRef(null);
+  const recordRef = useRef(false);
+  const recRef = useRef(false);
 
   //  Load posenet
   const runFacemesh = async () => {
     const net = await facemesh.load(facemesh.SupportedPackages.mediapipeFacemesh);
     interval = setInterval(() => {
-      console.log(isPaused)
       detect(net);
     }, 10);
   };
@@ -59,11 +57,10 @@ function App() {
       // Make Detections
       const face = await net.estimateFaces({input:video});
       if (face.length > 0) {
-        // if (isLoading) setLoading(false);
         loadingRef.current.style.display = 'none';
-        
-        if (isStarted) {
-          if (!isInProgress) setInProgress(true);
+        if (recordRef.current) {     
+          console.log('record')
+          recRef.current.style.display = 'block';
           data.push(face[0].scaledMesh);
         }
       }
@@ -122,6 +119,18 @@ function App() {
     }
   }
 
+  const handleRecord = () => {
+    if (!isRecorded) {
+      setRecord(true);
+      recordRef.current = true;
+    } else {
+      setRecord(false);
+      recordRef.current = false;
+      recRef.current.style.display = 'none';
+    }
+    
+  }
+
   return (
     <div id="app" className="center">
 
@@ -147,8 +156,14 @@ function App() {
               onClick={handlePause}>
                 <img src={pause} type="button" alt="pause" />
             </button>
+            <button
+              className={[(isRecorded) ? "btnClicked" : "btnNotClicked", "controlsBtn center"].join(' ')}
+              onClick={handleRecord}>
+                <img src={record} type="button" alt="record" />
+            </button>
           </div>
           <img ref={loadingRef} src={rolling} type="button" alt="rolling" className="rolling"/>
+          <div ref={recRef} className="redPoint"></div>
         </div>
 
         <div className="section views">
