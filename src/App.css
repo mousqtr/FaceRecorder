@@ -120,21 +120,61 @@ html, body, #root, #app {
   background-color: #403d3d;
 }
 
-#app .commands {
+#app .timelines {
   background-color: #403d3d;
 }
 
-#app .timelineOut {
-  width: 500px;
-  height: 20px;
+#app .piste {
+  width: 96%;
+  height: 60px;
+  margin-left: 2%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+#app .pisteName {
+  width: 9%;
+  height: 50px;
+  float: left;
+  color: white;
+}
+
+#app .timeline {
+  width: 90%;
+  height: 42px;
   border: 1px solid black;
+  background-color: #746e6e;
+  float: left;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+#app .timeline::-webkit-scrollbar {
+  height: 8px;
+}
+
+#app .timeline::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+#app .timeline::-webkit-scrollbar-thumb {
+  background-color: #864f9a;
+  border-radius: 25px;
+}
+
+#app .timelineOut {
+  width: 800px;
+  height: 50px;
+  border-right: 2px solid black;
   background-color: silver;
 }
 
 #app .timelineIn {
   width: 0px;
   height: 100%;
-  background-color: firebrick;
+  background-color: rgb(255, 255, 255, 0.2);
+  border-right: 3px solid black;
   overflow: visible;
   color: white;
   white-space: nowrap;

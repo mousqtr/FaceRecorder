@@ -183,11 +183,14 @@ function App() {
         </div>
 
         <div className="section rectangle">
-          <div className="title center">Control panel</div>
-          <div className="view commands">
-            <div className="timeline">
-              <div ref={timelineRef} className="timelineOut" onClick={(e) => handleTimeline(e)}>
-                <div className="timelineIn" style={{width: timelineWidth}}></div>
+          <div className="title center">Timelines</div>
+          <div className="view timelines">
+            <div className="piste">
+              <div className="pisteName center">Piste 1</div>
+              <div className="timeline">
+                <div ref={timelineRef} className="timelineOut" onClick={(e) => handleTimeline(e)}>
+                  <div className="timelineIn" style={{width: timelineWidth}}></div>
+                </div>
               </div>
             </div>
           </div>
