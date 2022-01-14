@@ -8,17 +8,20 @@ import { drawMesh } from "./utilities";
 
 // Import images
 import play from './play.png';
+import pause from './pause.png';
 import rolling from './rolling.gif';
 
 var data = [];
+var interval;
 
 function App() {
 
   const [isPlayed, setPlay] = useState(false);
-  const [isLoading, setLoading] = useState(false);
+  const [isPaused, setPause] = useState(false);
 
 
   const [isStarted, setStart] = useState(false);
+  
   const [isInProgress, setInProgress] = useState(false);
 
   const webcamRef = useRef(null);
@@ -28,7 +31,8 @@ function App() {
   //  Load posenet
   const runFacemesh = async () => {
     const net = await facemesh.load(facemesh.SupportedPackages.mediapipeFacemesh);
-    setInterval(() => {
+    interval = setInterval(() => {
+      console.log(isPaused)
       detect(net);
     }, 10);
   };
@@ -104,8 +108,17 @@ function App() {
   const handlePlay = () => {
     if (!isPlayed) {
       setPlay(true);
-      setLoading(true);
+      setPause(false);
       runFacemesh();
+      loadingRef.current.style.display = 'block';
+    }
+  }
+
+  const handlePause = () => {
+    if (!isPaused) {
+      setPause(true);
+      setPlay(false);
+      clearInterval(interval);
     }
   }
 
@@ -129,10 +142,13 @@ function App() {
               onClick={handlePlay}>
                 <img src={play} type="button" alt="play" />
             </button>
+            <button
+              className={[(isPaused) ? "btnClicked" : "btnNotClicked", "controlsBtn center"].join(' ')}
+              onClick={handlePause}>
+                <img src={pause} type="button" alt="pause" />
+            </button>
           </div>
-          {
-            (isLoading === true) ? <img ref={loadingRef} src={rolling} type="button" alt="rolling" className="rolling"/> : <></>
-          }
+          <img ref={loadingRef} src={rolling} type="button" alt="rolling" className="rolling"/>
         </div>
 
         <div className="section views">

@@ -59,6 +59,9 @@ html, body, #root, #app {
   height: 36px;
   position: absolute;
   bottom: 1%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
 
 #app .controls .controlsBtn {
@@ -74,6 +77,7 @@ html, body, #root, #app {
   position: absolute;
   top: 140px;
   left: 175px;
+  display: none;
 }
 
 
