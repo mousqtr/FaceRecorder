@@ -128,7 +128,17 @@ function App() {
       recordRef.current = false;
       recRef.current.style.display = 'none';
     }
+  }
+
+  const [timelineWidth, setTimelineWidth] = useState('0px');
+  const timelineRef = useRef(null);
+  
+  const handleTimeline = (e) => {
     
+    let size = e.clientX - timelineRef.current.getBoundingClientRect().left;
+    console.log(size + "px")
+    setTimelineWidth(size + "px");
+    // let pct = Math.floor((size / timelineRef.current.clientWidth) * 100);
   }
 
   return (
@@ -136,13 +146,13 @@ function App() {
 
       <div className="applicationTitle center">FACE RECOGNITION</div>
       <div className="application">
-        <div className="section views">
+        <div className="section square">
           <div className="title center">Webcam</div>
           <Webcam ref={webcamRef} className="view"/>
           <div className="controls center"></div>
         </div>
         
-        <div className="section views">
+        <div className="section square">
           <div className="title center">Simulation</div>
           <canvas ref={canvasRef} className="view simulation"/>
           <div className="controls center">
@@ -166,14 +176,21 @@ function App() {
           <div ref={recRef} className="redPoint"></div>
         </div>
 
-        <div className="section views">
+        <div className="section square">
           <div className="title center">Preview</div>
           <canvas className="view result"/>
           <div className="controls center"></div>
         </div>
 
-        <div className="section panel">
+        <div className="section rectangle">
           <div className="title center">Control panel</div>
+          <div className="view commands">
+            <div className="timeline">
+              <div ref={timelineRef} className="timelineOut" onClick={(e) => handleTimeline(e)}>
+                <div className="timelineIn" style={{width: timelineWidth}}></div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
