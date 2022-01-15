@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import "./App.css";
+import * as tf from "@tensorflow/tfjs"; // Don't remove it
 
 
 import Camera     from './components/Camera/Camera';

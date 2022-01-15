@@ -18,7 +18,7 @@ import * as recognitionSelectors    from './../../store/selectors/recognition';
 
 var interval;
 
-function Simulation (props, ref) {
+const Simulation = (props, ref) => {
 
     const dispatch = useDispatch();
 
@@ -134,5 +134,5 @@ function Simulation (props, ref) {
     );
 }
 
-export default Simulation = React.forwardRef(Simulation);
+export default React.forwardRef(Simulation);
 

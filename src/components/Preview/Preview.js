@@ -15,7 +15,7 @@ import * as recognitionSelectors    from './../../store/selectors/recognition';
 
 var interval;
 
-function Preview (props, ref) {
+const Preview = (props, ref) => {
 
     const dispatch = useDispatch();
 
@@ -76,4 +76,4 @@ function Preview (props, ref) {
     );
 }
 
-export default Preview = React.forwardRef(Preview);
+export default React.forwardRef(Preview);

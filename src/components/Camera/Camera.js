@@ -5,7 +5,7 @@ import "./Camera.css";
 
 
 
-function Camera (props, ref) {
+const Camera = (props, ref) => {
     return (
         <div id="camera" className="section square">
             <div className="title center">Webcam</div>
@@ -15,4 +15,5 @@ function Camera (props, ref) {
     );
 }
 
-export default Camera = React.forwardRef(Camera);
+
+export default React.forwardRef(Camera);

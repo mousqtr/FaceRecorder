@@ -11,7 +11,7 @@ import * as recognitionActions      from './../../store/features/recognition';
 import * as recognitionSelectors    from './../../store/selectors/recognition';
 
 
-function Timelines (props, ref) {
+const Timelines = (props, ref) => {
 
     const dispatch = useDispatch();
 
@@ -58,4 +58,4 @@ function Timelines (props, ref) {
     );
 }
 
-export default Timelines = React.forwardRef(Timelines);
+export default React.forwardRef(Timelines);
