@@ -9,3 +9,5 @@ export const getPreviewPlay = (state) => state.recognition.isPreviewPlay;
 export const getTimelineWidth = (state) => state.recognition.timelineWidth;
 
 export const getTimelinePosition = (state) => state.recognition.timelinePosition;
+
+export const getFrames = (state) => state.recognition.frames;

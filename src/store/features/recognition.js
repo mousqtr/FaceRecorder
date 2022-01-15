@@ -9,7 +9,8 @@ const { actions, reducer } = createSlice({
         isSimulationLoading: false,
         isPreviewPlay: false,
         timelineWidth: '0px',
-        timelinePosition: 0
+        timelinePosition: 0,
+        frames: []
     },
     reducers: {
         setWebcamPlay: (state, action) => {
@@ -30,6 +31,9 @@ const { actions, reducer } = createSlice({
         setTimelinePosition: (state, action) => {
             state.timelinePosition = action.payload
         },
+        addFrame: (state, action) => {
+            state.frames.push(action.payload);
+        },
     },
 });
 
@@ -39,7 +43,8 @@ export const {
     setSimulationRecord,
     setPreviewPlay,
     setTimelineWidth,
-    setTimelinePosition
+    setTimelinePosition,
+    addFrame
 } = actions;
 
 export default reducer;

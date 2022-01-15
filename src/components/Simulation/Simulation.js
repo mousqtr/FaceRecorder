@@ -1,9 +1,9 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 
 
-import { drawMesh, drawFrame } from "./../../utilities";
+import { drawMesh } from "./../../utilities";
 
 import "./Simulation.css";
 
@@ -17,13 +17,14 @@ import * as recognitionSelectors    from './../../store/selectors/recognition';
 
 
 var interval;
-var data = [];
 
 function Simulation (props, ref) {
 
     const dispatch = useDispatch();
-    const isSimulationPlay = useSelector(recognitionSelectors.getSimulationPlay);
+
+    const isSimulationPlay   = useSelector(recognitionSelectors.getSimulationPlay);
     const isSimulationRecord = useSelector(recognitionSelectors.getSimulationRecord);
+    const frames             = useSelector(recognitionSelectors.getFrames);
 
     const { webcamRef, canvasRef } = ref;
     const loadingRef = useRef(null);
@@ -51,7 +52,7 @@ function Simulation (props, ref) {
             recordRef.current = true;
         } else {
             dispatch(recognitionActions.setSimulationRecord(false));
-            dispatch(recognitionActions.setTimelineWidth(data.length + "px"));
+            dispatch(recognitionActions.setTimelineWidth(frames.length + "px"));
             recordRef.current = false;
         }
     }
@@ -86,8 +87,9 @@ function Simulation (props, ref) {
                 if (face.length > 0) {
                     loadingRef.current.style.display = 'none';
                     if (recordRef.current) {     
-                        console.log('record')        
-                        data.push(face[0].scaledMesh);
+                        console.log('record');
+                        dispatch(recognitionActions.addFrame(face[0].scaledMesh));
+
                         redPointRef.current.style.display = 'block';
                     } else {
                         redPointRef.current.style.display = 'none';
@@ -96,7 +98,9 @@ function Simulation (props, ref) {
 
                 // Get canvas context
                 const ctx = canvasRef.current.getContext("2d");
-                requestAnimationFrame(()=>{drawMesh(face, ctx)});
+                requestAnimationFrame(() => {
+                    drawMesh(face, ctx)
+                });
         }
     };
 
@@ -131,3 +135,4 @@ function Simulation (props, ref) {
 }
 
 export default Simulation = React.forwardRef(Simulation);
+
