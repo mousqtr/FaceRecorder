@@ -21,9 +21,6 @@ const { actions, reducer } = createSlice({
         setSimulationRecord: (state, action) => {
             state.isSimulationRecord = action.payload
         },
-        setSimulationLoading: (state, action) => {
-            state.isSimulationLoading = action.payload
-        },
         setPreviewPlay: (state, action) => {
             state.isPreviewPlay = action.payload
         },
@@ -40,7 +37,6 @@ export const {
     setWebcamPlay,
     setSimulationPlay,
     setSimulationRecord,
-    setSimulationLoading,
     setPreviewPlay,
     setTimelineWidth,
     setTimelinePosition

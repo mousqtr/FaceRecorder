@@ -1,0 +1,15 @@
+#simulation .title {
+    background-color: blueviolet;
+  }
+  
+#simulation .view {
+    background-color: black;
+}
+ 
+#simulation .btnNotClicked {
+    background-color: blueviolet; 
+}
+
+#simulation .btnClicked {
+    background-color: green;
+}

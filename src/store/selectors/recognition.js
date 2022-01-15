@@ -1,13 +1,11 @@
-export const getWebcamPlay = (state) => state.isWebcamPlay;
+export const getWebcamPlay = (state) => state.recognition.isWebcamPlay;
 
-export const getSimulationPlay = (state) => state.isSimulationPlay;
+export const getSimulationPlay = (state) => state.recognition.isSimulationPlay;
 
-export const getSimulationRecord = (state) => state.isSimulationRecord;
+export const getSimulationRecord = (state) => state.recognition.isSimulationRecord;
 
-export const getSimulationLoading = (state) => state.isSimulationLoading;
+export const getPreviewPlay = (state) => state.recognition.isPreviewPlay;
 
-export const getPreviewPlay = (state) => state.isPreviewPlay;
+export const getTimelineWidth = (state) => state.recognition.timelineWidth;
 
-export const getTimelineWidth = (state) => state.timelineWidth;
-
-export const getTimelinePosition = (state) => state.timelinePosition;
+export const getTimelinePosition = (state) => state.recognition.timelinePosition;

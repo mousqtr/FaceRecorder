@@ -18,8 +18,7 @@ export default function App() {
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
-  // const loadingRef = useRef(null);
-  // const recordRef = useRef(false);
+
   // const recRef = useRef(false);
   // const timelineRef = useRef(null);
   // const previewRef = useRef(null);

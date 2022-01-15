@@ -101,36 +101,15 @@ html, body, #root, #app {
   margin-left: 5px;
 }
 
-#app .controls .btnNotClicked {
-  background-color: #5c5656;
-}
 
-#app .controls .btnClicked {
-  background-color: green;
-}
+
 
 #app .controls img {
   width: 20px;
   width: 20px;
 }
 
-/* Camera */
-#app .camera .title {
-  background-color: #cf4040;
-}
 
-/* Simulation */
-#app .simulation .title {
-  background-color: blueviolet;
-}
-
-#app .simulation .view {
-  background-color: black;
-}
-
-#app .simulation .btnNotClicked {
-  background-color: blueviolet;
-}
 
 /* Preview */
 #app .preview .title {

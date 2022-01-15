@@ -17,19 +17,24 @@ import * as recognitionSelectors    from './../../store/selectors/recognition';
 
 
 var interval;
+var data = [];
 
 function Simulation (props, ref) {
 
     const dispatch = useDispatch();
     const isSimulationPlay = useSelector(recognitionSelectors.getSimulationPlay);
     const isSimulationRecord = useSelector(recognitionSelectors.getSimulationRecord);
+
     const { webcamRef, canvasRef } = ref;
+    const loadingRef = useRef(null);
+    const recordRef = useRef(false);
+    const redPointRef = useRef(false);
 
     const handlePlay = () => {
         if (!isSimulationPlay) {
             dispatch(recognitionActions.setSimulationPlay(true));
-            dispatch(recognitionActions.setSimulationLoading(true));
             runFacemesh();
+            loadingRef.current.style.display = 'block';
         }
     }
 
@@ -40,16 +45,16 @@ function Simulation (props, ref) {
         }
     }
 
-    // const handleRecord = () => {
-    //     if (!isSimulationRecord) {
-    //         dispatch(recognitionActions.setSimulationRecord(true));
-    //         recordRef.current = true;
-    //     } else {
-    //         dispatch(recognitionActions.setSimulationRecord(false));
-    //         dispatch(recognitionActions.setTimelineWidth(data.length + "px"));         
-    //         recordRef.current = false;
-    //     }
-    // }
+    const handleRecord = () => {
+        if (!isSimulationRecord) {
+            dispatch(recognitionActions.setSimulationRecord(true));
+            recordRef.current = true;
+        } else {
+            dispatch(recognitionActions.setSimulationRecord(false));
+            dispatch(recognitionActions.setTimelineWidth(data.length + "px"));
+            recordRef.current = false;
+        }
+    }
 
     const runFacemesh = async () => {
       const net = await facemesh.load(facemesh.SupportedPackages.mediapipeFacemesh);
@@ -78,14 +83,16 @@ function Simulation (props, ref) {
 
                 // Make Detections
                 const face = await net.estimateFaces({input:video});
-                // if (face.length > 0) {
-                //     dispatch(recognitionActions.setSimulationLoading(false));
-                //     const isSimulationRec = useSelector(recognitionSelectors.getSimulationRecord);
-                //     if (isSimulationRecord) {     
-                //         console.log('record')
-                //         data.push(face[0].scaledMesh);
-                //     }
-                // }
+                if (face.length > 0) {
+                    loadingRef.current.style.display = 'none';
+                    if (recordRef.current) {     
+                        console.log('record')        
+                        data.push(face[0].scaledMesh);
+                        redPointRef.current.style.display = 'block';
+                    } else {
+                        redPointRef.current.style.display = 'none';
+                    } 
+                }
 
                 // Get canvas context
                 const ctx = canvasRef.current.getContext("2d");
@@ -94,32 +101,31 @@ function Simulation (props, ref) {
     };
 
     return (
-        <div className="section square simulation">
+        <div id="simulation" className="section square">
             <div className="title center">Simulation</div>
             <canvas ref={canvasRef} className="view"/>
             <div className="controls center">
                 {
                     (!isSimulationPlay) ? 
                     <button
-                        className="controlsBtn center"
+                        className="btnNotClicked controlsBtn center"
                         onClick={handlePlay}>
                             <img src={play} type="button" alt="play" />
                     </button> : 
                     <button
-                        className="controlsBtn center"                        
+                        className="btnNotClicked controlsBtn center"                 
                         onClick={handlePause}>
                             <img src={pause} type="button" alt="pause" />
                     </button>
                 }
-                {/* <button
+                <button
                     className={[(isSimulationRecord) ? "btnClicked" : "btnNotClicked", "controlsBtn center"].join(' ')}
                     onClick={handleRecord}>
                     <img src={record} type="button" alt="record" />
-                </button> */}
+                </button>
             </div>
-            {/* <img ref={loadingRef} src={rolling} type="button" alt="rolling" className="rolling"/>
-            <div ref={recRef} className="redPoint"></div> */}
-            
+            <img ref={loadingRef} src={rolling} type="button" alt="rolling" className="rolling"/>
+            <div ref={redPointRef} className="redPoint"></div>
         </div>
     );
 }
