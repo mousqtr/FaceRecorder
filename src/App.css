@@ -1,6 +1,7 @@
 html, body, #root, #app {
   width: max(1240px, 100%);
   height: max(800px, 100%);
+  margin: 0;
 }
 
 .center {
@@ -23,12 +24,13 @@ html, body, #root, #app {
 
 #app .applicationTitle {
   width: 600px;
-  height: 35px;
-  background-color: #5c5656;
+  height: 0;
   color: white;
   font-size: 25px;
-  margin-bottom: 10px;
-  border-radius: 25px;
+  border-bottom: 35px solid #5c5656;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  text-align: center;
 }
 
 #app .section {
@@ -100,7 +102,7 @@ html, body, #root, #app {
 }
 
 #app .controls .btnNotClicked {
-  background-color: royalblue;
+  background-color: #5c5656;
 }
 
 #app .controls .btnClicked {
@@ -112,8 +114,8 @@ html, body, #root, #app {
   width: 20px;
 }
 
-/* Webcam */
-#app .webcam .title {
+/* Camera */
+#app .camera .title {
   background-color: #cf4040;
 }
 
@@ -126,6 +128,10 @@ html, body, #root, #app {
   background-color: black;
 }
 
+#app .simulation .btnNotClicked {
+  background-color: blueviolet;
+}
+
 /* Preview */
 #app .preview .title {
   background-color: darkgoldenrod;
@@ -133,6 +139,10 @@ html, body, #root, #app {
 
 #app .preview .view {
   background-color: #403d3d;
+}
+
+#app .preview .btnNotClicked {
+  background-color: darkgoldenrod;
 }
 
 /* Timelines */
