@@ -67,16 +67,16 @@ const Simulation = (props, ref) => {
     const detect = async (net) => {
         if (typeof webcamRef.current !== "undefined" &&
             webcamRef.current !== null &&
-            webcamRef.current.video.readyState === 4) {
+            webcamRef.current.readyState === 4) {
 
                 // Get Video Properties
-                const video = webcamRef.current.video;
-                const videoWidth = webcamRef.current.video.videoWidth;
-                const videoHeight = webcamRef.current.video.videoHeight;
+                const video = webcamRef.current;
+                const videoWidth = webcamRef.current.videoWidth;
+                const videoHeight = webcamRef.current.videoHeight;
 
                 // Set video width
-                webcamRef.current.video.width = videoWidth;
-                webcamRef.current.video.height = videoHeight;
+                webcamRef.current.width = videoWidth;
+                webcamRef.current.height = videoHeight;
 
                 // Set canvas width
                 canvasRef.current.width = videoWidth;

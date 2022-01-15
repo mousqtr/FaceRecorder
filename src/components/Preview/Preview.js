@@ -34,8 +34,8 @@ const Preview = (props, ref) => {
             interval = setInterval(() => {
                 if (frames.length > index) {
                     dispatch(recognitionActions.setTimelinePosition(index));
-                    const videoWidth = webcamRef.current.video.videoWidth;
-                    const videoHeight = webcamRef.current.video.videoHeight;
+                    const videoWidth = webcamRef.current.videoWidth;
+                    const videoHeight = webcamRef.current.videoHeight;
                     previewRef.current.width = videoWidth;
                     previewRef.current.height = videoHeight;
                     const ctx = previewRef.current.getContext("2d");

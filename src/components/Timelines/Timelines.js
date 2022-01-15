@@ -31,8 +31,8 @@ const Timelines = (props, ref) => {
 
         // Change preview frame
         if (frames.length > size) {
-            const videoWidth = webcamRef.current.video.videoWidth;
-            const videoHeight = webcamRef.current.video.videoHeight;
+            const videoWidth = webcamRef.current.videoWidth;
+            const videoHeight = webcamRef.current.videoHeight;
             previewRef.current.width = videoWidth;
             previewRef.current.height = videoHeight;
             const ctx = previewRef.current.getContext("2d");
