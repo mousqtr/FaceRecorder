@@ -1,0 +1,70 @@
+#export .view {
+    background-color: #403d3d;
+    padding: 10px;
+}
+
+#export h3 {
+    font-size: 12px;
+    width: 100%;
+    height: 18px;
+    color: white;
+    background-color: #746e6e;
+    margin: 0;
+}
+
+#export .informations {
+    background-color: #343434;
+    margin-bottom: 10px;
+}
+
+#export .configurations {
+    background-color: #343434;
+}
+
+#export .content {
+    padding: 10px;
+}
+
+#export .piste input {
+    width: 50px;
+    height: 25px;
+}
+
+#export .size input {
+    width: 50px;
+    height: 25px;
+}
+
+
+#export .setting {
+    width: 100%;
+    height: 25px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#export label {
+    color: white;
+    width: 100px;
+    margin-right: 10px;
+    font-size: 15px;
+}
+
+#export .filename input {
+    width: 200px;
+    height: 25px;
+}
+
+#export .type input {
+    margin-right: 10px;
+}
+
+#export .exportBtn {
+    border: 1px solid white;
+    padding: 2px;
+    width: 100px;
+    height: 30px;
+    background-color: #746e6e;
+    color: white;
+    float: right;
+}

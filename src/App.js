@@ -2,13 +2,13 @@ import React, { useRef } from "react";
 import "./App.css";
 import * as tf from "@tensorflow/tfjs"; // Don't remove it
 
-
 import Camera     from './components/Camera/Camera';
 import Simulation from './components/Simulation/Simulation';
 import Preview    from './components/Preview/Preview';
 import Timelines  from './components/Timelines/Timelines';
+import Export     from './components/Export/Export';
 
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
 
@@ -28,6 +28,7 @@ export default function App() {
         <Simulation ref={{webcamRef: webcamRef, canvasRef: canvasRef}}/>
         <Preview    ref={{webcamRef: webcamRef, previewRef: previewRef}}/>
         <Timelines  ref={{webcamRef: webcamRef, previewRef: previewRef}}/>
+        <Export     />
       </div>
 
     </div>
