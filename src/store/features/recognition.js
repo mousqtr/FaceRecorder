@@ -8,8 +8,6 @@ const { actions, reducer } = createSlice({
         isSimulationRecord: false,
         isSimulationLoading: false,
         isPreviewPlay: false,
-        timelineWidth: '0px',
-        timelinePosition: 0,
         tracks: [],
         selectedTrack: -1
     },
@@ -27,22 +25,35 @@ const { actions, reducer } = createSlice({
             state.isPreviewPlay = action.payload
         },
         setTimelineWidth: (state, action) => {
-            state.timelineWidth = action.payload
+            if (state.tracks[action.payload.index]) {
+                state.tracks[action.payload.index].timelineWidth = action.payload.timelineWidth;
+            }
         },
         setTimelinePosition: (state, action) => {
-            state.timelinePosition = action.payload
+            if (state.tracks[action.payload.index]) {
+                state.tracks[action.payload.index].timelinePosition = action.payload.timelinePosition;
+            }
         },
         addTrack: (state, action) => {
-            state.tracks.push([]);
+            state.tracks.push({
+                timelineWidth: '0px',
+                timelinePosition: 0,
+                data: []
+            });
         },
         removeTrack: (state, action) => {
-            if (action.payload > -1) {
+            if (action.payload > -1 && action.payload < state.tracks.length) {
                 state.tracks.splice(action.payload, 1);
+                if (action.payload === state.selectedTrack) {
+                    state.selectedTrack = -1;
+                }
             }
         },
         addFrame: (state, action) => {
-            if (state.selectedTrack > -1 && state.selectedTrack < state.tracks.length) {
-                state.tracks[state.selectedTrack].push(action.payload);
+            if (state.selectedTrack > -1 
+                && state.selectedTrack < state.tracks.length
+                && state.tracks[state.selectedTrack]) {
+                state.tracks[state.selectedTrack].data.push(action.payload);
             }
         },
         setSelectedTrack: (state, action) => {

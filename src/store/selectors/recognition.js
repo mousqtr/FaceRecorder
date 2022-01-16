@@ -6,10 +6,6 @@ export const getSimulationRecord = (state) => state.recognition.isSimulationReco
 
 export const getPreviewPlay = (state) => state.recognition.isPreviewPlay;
 
-export const getTimelineWidth = (state) => state.recognition.timelineWidth;
-
-export const getTimelinePosition = (state) => state.recognition.timelinePosition;
-
 export const getTracks = (state) => state.recognition.tracks;
 
 export const getSelectedTrack = (state) => state.recognition.selectedTrack;

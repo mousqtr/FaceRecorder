@@ -33,6 +33,7 @@ const Simulation = (props, ref) => {
     const loadingRef = useRef(null);
     const recordRef = useRef(false);
     const redPointRef = useRef(false);
+    const loadFinishRef = useRef(false);
 
     const handlePlay = () => {
         if (!isSimulationPlay && isWebcamPlay) {
@@ -50,7 +51,8 @@ const Simulation = (props, ref) => {
     }
 
     const handleRecord = () => {
-        if (!isSimulationRecord && selectedTrack !== -1) {
+        console.log(loadFinishRef)
+        if (!isSimulationRecord && selectedTrack > -1 && loadFinishRef.current) {
             dispatch(recognitionActions.setSimulationRecord(true));
             recordRef.current = true;
         }
@@ -59,7 +61,8 @@ const Simulation = (props, ref) => {
     const handleSave = () => {
         if (isSimulationRecord) {
             dispatch(recognitionActions.setSimulationRecord(false));
-            dispatch(recognitionActions.setTimelineWidth(tracks[selectedTrack].length + "px"));
+            let payload = {index: selectedTrack, timelineWidth: tracks[selectedTrack].data.length + "px"}
+            dispatch(recognitionActions.setTimelineWidth(payload));
             recordRef.current = false;
         }
     }
@@ -93,6 +96,7 @@ const Simulation = (props, ref) => {
                 // Make Detections
                 const face = await net.estimateFaces({input:video});
                 if (face.length > 0) {
+                    loadFinishRef.current = true;
                     loadingRef.current.style.display = 'none';
                     if (recordRef.current) {     
                         console.log('record');

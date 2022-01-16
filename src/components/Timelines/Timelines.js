@@ -16,8 +16,6 @@ const Timelines = (props, ref) => {
 
     const dispatch = useDispatch();
 
-    const timelineWidth     = useSelector(recognitionSelectors.getTimelineWidth);
-    const timelinePosition  = useSelector(recognitionSelectors.getTimelinePosition);
     const selectedTrack     = useSelector(recognitionSelectors.getSelectedTrack);
     const tracks            = useSelector(recognitionSelectors.getTracks);
 
@@ -27,18 +25,19 @@ const Timelines = (props, ref) => {
     const handleTimeline = (e) => {
 
         // Update timeline position
-        let size = Math.floor(e.clientX - timelineRef.current.getBoundingClientRect().left);
-        dispatch(recognitionActions.setTimelinePosition(size));
-        // let pct = Math.floor((size / timelineRef.current.clientWidth) * 100);
+        let position = Math.floor(e.clientX - timelineRef.current.getBoundingClientRect().left);
+        let payload = {index: selectedTrack, timelinePosition: position}
+        dispatch(recognitionActions.setTimelinePosition(payload));
+        // let pct = Math.floor((position / timelineRef.current.clientWidth) * 100);
 
         // Change preview frame
-        if (selectedTrack > -1 && tracks[selectedTrack].length > size) {
+        if (selectedTrack > -1 && tracks[selectedTrack].data.length > position) {
             const videoWidth = webcamRef.current.videoWidth;
             const videoHeight = webcamRef.current.videoHeight;
             previewRef.current.width = videoWidth;
             previewRef.current.height = videoHeight;
             const ctx = previewRef.current.getContext("2d");
-            drawFrame(tracks[selectedTrack][size], ctx);
+            drawFrame(tracks[selectedTrack].data[position], ctx);
         }
     }
 
@@ -70,8 +69,8 @@ const Timelines = (props, ref) => {
                         <div key={index} className="track" onClick={() => handleSelectTrack(index)} style={{backgroundColor: (selectedTrack === index) ? '#525252' : 'inherit'}}>
                             <div className="trackName center">Track {index + 1}</div>
                             <div className="timeline">
-                                <div ref={timelineRef} className="timelineOut" onClick={(e) => handleTimeline(e)} style={{width: timelineWidth}}>
-                                <div className="timelineIn" style={{width: timelinePosition+'px'}}></div>
+                                <div ref={timelineRef} className="timelineOut" onClick={(e) => handleTimeline(e)} style={{width: track.timelineWidth}}>
+                                <div className="timelineIn" style={{width: track.timelinePosition+'px'}}></div>
                                 </div>
                             </div>
                             <button
