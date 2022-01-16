@@ -9,7 +9,9 @@ const { actions, reducer } = createSlice({
         isSimulationLoading: false,
         isPreviewPlay: false,
         tracks: [],
-        selectedTrack: -1
+        selectedTrack: -1,
+        isSimulationStop: false,
+        isPreviewStop: false
     },
     reducers: {
         setWebcamPlay: (state, action) => {
@@ -67,6 +69,12 @@ const { actions, reducer } = createSlice({
             if (state.tracks.length > action.payload) {
                 state.selectedTrack = action.payload
             }
+        },
+        setSimulationStop: (state, action) => {
+            state.isSimulationStop = action.payload
+        },
+        setPreviewStop: (state, action) => {
+            state.isPreviewStop = action.payload
         }
     },
 });
@@ -82,7 +90,9 @@ export const {
     removeTrack,
     addFrame,
     addFrames,
-    setSelectedTrack
+    setSelectedTrack,
+    setSimulationStop,
+    setPreviewStop
 } = actions;
 
 export default reducer;

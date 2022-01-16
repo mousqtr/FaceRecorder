@@ -9,3 +9,7 @@ export const getPreviewPlay = (state) => state.recognition.isPreviewPlay;
 export const getTracks = (state) => state.recognition.tracks;
 
 export const getSelectedTrack = (state) => state.recognition.selectedTrack;
+
+export const getSimulationStop = (state) => state.recognition.isSimulationStop;
+
+export const getPreviewStop = (state) => state.recognition.isPreviewStop;

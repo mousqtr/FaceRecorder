@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 
@@ -29,12 +29,20 @@ const Simulation = (props, ref) => {
     const isWebcamPlay       = useSelector(recognitionSelectors.getWebcamPlay);
     const selectedTrack      = useSelector(recognitionSelectors.getSelectedTrack);
     const tracks             = useSelector(recognitionSelectors.getTracks);
+    const isSimulationStop   = useSelector(recognitionSelectors.getSimulationStop);
 
     const { webcamRef, canvasRef } = ref;
     const loadingRef = useRef(null);
     const recordRef = useRef(false);
     const redPointRef = useRef(false);
     const loadFinishRef = useRef(false);
+
+    useEffect(() => {
+        if (isSimulationStop) {
+            dispatch(recognitionActions.setSimulationStop(false));
+            handlePause();
+        }
+    }, [isSimulationStop])
 
     const handlePlay = () => {
         if (!isSimulationPlay && isWebcamPlay) {

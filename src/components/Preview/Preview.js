@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 
@@ -23,10 +23,19 @@ const Preview = (props, ref) => {
     const isPreviewPlay     = useSelector(recognitionSelectors.getPreviewPlay);
     const selectedTrack     = useSelector(recognitionSelectors.getSelectedTrack);
     const tracks            = useSelector(recognitionSelectors.getTracks);
+    const isPreviewStop     = useSelector(recognitionSelectors.getPreviewStop);
 
     const { webcamRef, previewRef } = ref;
 
+    useEffect(() => {
+        if (isPreviewStop) {
+            dispatch(recognitionActions.setPreviewStop(false));
+            handlePause();
+        }
+    }, [isPreviewStop]);
+
     const handlePlay = () => {
+        dispatch(recognitionActions.setSimulationStop(true));
         const videoWidth = webcamRef.current.videoWidth;
         const videoHeight = webcamRef.current.videoHeight;
 

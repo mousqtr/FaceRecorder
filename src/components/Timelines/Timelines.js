@@ -23,6 +23,7 @@ const Timelines = (props, ref) => {
     const { webcamRef, previewRef } = ref;
 
     const handleTimeline = (e) => {
+        dispatch(recognitionActions.setPreviewStop(true));
 
         // Update timeline position
         let position = Math.floor(e.clientX - timelineRef.current.getBoundingClientRect().left);
