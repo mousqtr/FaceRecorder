@@ -1,30 +1,37 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./Camera.css";
 
 import play     from './../../assets/play.png';
 import pause    from './../../assets/pause.png';
+import rolling  from './../../assets/rolling.gif';
 
+import * as recognitionActions      from './../../store/features/recognition';
 import * as recognitionSelectors    from './../../store/selectors/recognition';
 
 
 
 const Camera = (props, ref) => {
 
-    // const [videoStream, setVideoStream] = useState(undefined);
+    const dispatch = useDispatch();
+
+    const [videoStream, setVideoStream] = useState(undefined);
+    const [isLoading, setLoading] = useState(false);
+
     const isWebcamPlay = useSelector(recognitionSelectors.getWebcamPlay);
 
     const handlePlay = () => {
         if (!isWebcamPlay) {
+            setLoading(true);
+            dispatch(recognitionActions.setWebcamPlay(true));
             navigator.mediaDevices.getUserMedia({video: true, audio: false}).then( stream => {
-                // setVideoStream(stream);
-                console.log(ref.current.video);
-                console.log(ref.current);
+                setVideoStream(stream);
                 ref.current.srcObject = stream;
                 console.log(ref.current)
                 ref.current.addEventListener("loadedmetadata", () => {
-                    console.log("Load meta data")
+                    console.log("Load meta data");
+                    setLoading(false);
                     ref.current.play();
                 });
             })
@@ -33,33 +40,40 @@ const Camera = (props, ref) => {
 
     const handlePause = () => {
         if (isWebcamPlay) {
-            console.log('handlePause');
+            dispatch(recognitionActions.setWebcamPlay(false));
+            videoStream.getVideoTracks().forEach((track) => {
+                track.stop();
+                videoStream.removeTrack(track);
+            });
+            setVideoStream(undefined);
         }
     }
 
     return (
         <div id="camera" className="section square">
-            <div className="title center">Webcam</div>
-                {/* <Webcam ref={ref} className="view"/> */}
-                <video 
-                    className='view'
-                    ref={ref}>
-                </video> 
-                <div className="controls center">
+            <div className="title center">Webcam</div>    
+            <video 
+                className='view'
+                ref={ref}>
+            </video> 
+            <div className="controls center">
                 {
                     (!isWebcamPlay) ? 
                     <button
-                        className="btnNotClicked controlsBtn center"
+                        className="controlsBtn center"
                         onClick={handlePlay}>
                             <img src={play} type="button" alt="play" />
                     </button> : 
                     <button
-                        className="btnNotClicked controlsBtn center"                 
+                        className="controlsBtn center"                 
                         onClick={handlePause}>
                             <img src={pause} type="button" alt="pause" />
                     </button>
-                }
+                }               
             </div>
+            {
+                (isLoading) ? <img src={rolling} type="button" alt="rolling" className="rolling"/> : <></>
+            }
         </div>
     );
 }

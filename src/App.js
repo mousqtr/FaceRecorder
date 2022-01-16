@@ -20,7 +20,7 @@ export default function App() {
     <div id="app" className="center">
 
       <div className="applicationTitle">
-        FACE RECOGNITION
+        <p>FACE RECOGNITION</p>
       </div>
 
       <div className="application">

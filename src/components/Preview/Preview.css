@@ -1,16 +1,3 @@
-/* Preview */
-#preview .title {
-    background-color: darkgoldenrod;
-}
-
 #preview .view {
-    background-color: #403d3d;
-}
-
-#preview .btnNotClicked {
-    background-color: darkgoldenrod;
-}
-
-#preview .btnClicked {
-    background-color: green;
+    background-color: #25252e;
 }

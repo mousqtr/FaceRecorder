@@ -61,12 +61,12 @@ const Preview = (props, ref) => {
                 {
                     (!isPreviewPlay) ? 
                     <button
-                        className="btnNotClicked controlsBtn center"
+                        className="controlsBtn center"
                         onClick={handlePlay}>
                             <img src={play} type="button" alt="play" />
                     </button> : 
                     <button
-                        className="btnNotClicked controlsBtn center"                 
+                        className="controlsBtn center"                 
                         onClick={handlePause}>
                             <img src={pause} type="button" alt="pause" />
                     </button>

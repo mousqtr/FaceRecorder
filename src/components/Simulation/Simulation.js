@@ -10,6 +10,7 @@ import "./Simulation.css";
 import play     from './../../assets/play.png';
 import pause    from './../../assets/pause.png';
 import record   from './../../assets/record.png';
+import save     from './../../assets/save.png';
 import rolling  from './../../assets/rolling.gif';
 
 import * as recognitionActions      from './../../store/features/recognition';
@@ -50,12 +51,17 @@ const Simulation = (props, ref) => {
         if (!isSimulationRecord) {
             dispatch(recognitionActions.setSimulationRecord(true));
             recordRef.current = true;
-        } else {
+        }
+    }
+
+    const handleSave = () => {
+        if (isSimulationRecord) {
             dispatch(recognitionActions.setSimulationRecord(false));
             dispatch(recognitionActions.setTimelineWidth(frames.length + "px"));
             recordRef.current = false;
         }
     }
+    
 
     const runFacemesh = async () => {
       const net = await facemesh.load(facemesh.SupportedPackages.mediapipeFacemesh);
@@ -112,21 +118,29 @@ const Simulation = (props, ref) => {
                 {
                     (!isSimulationPlay) ? 
                     <button
-                        className="btnNotClicked controlsBtn center"
+                        className="controlsBtn center"
                         onClick={handlePlay}>
                             <img src={play} type="button" alt="play" />
                     </button> : 
                     <button
-                        className="btnNotClicked controlsBtn center"                 
+                        className="controlsBtn center"                 
                         onClick={handlePause}>
                             <img src={pause} type="button" alt="pause" />
                     </button>
                 }
-                <button
-                    className={[(isSimulationRecord) ? "btnClicked" : "btnNotClicked", "controlsBtn center"].join(' ')}
-                    onClick={handleRecord}>
-                    <img src={record} type="button" alt="record" />
-                </button>
+                {
+                    (!isSimulationRecord) ? 
+                    <button
+                        className="controlsBtn center"
+                        onClick={handleRecord}>
+                            <img src={record} type="button" alt="play" />
+                    </button> : 
+                    <button
+                        className="controlsBtn center"                 
+                        onClick={handleSave}>
+                            <img src={save} type="button" alt="save" />
+                    </button>
+                }
             </div>
             <img ref={loadingRef} src={rolling} type="button" alt="rolling" className="rolling"/>
             <div ref={redPointRef} className="redPoint"></div>

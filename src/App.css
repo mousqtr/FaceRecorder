@@ -2,6 +2,7 @@ html, body, #root, #app {
   width: max(1240px, 100%);
   height: max(800px, 100%);
   margin: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .center {
@@ -24,12 +25,22 @@ html, body, #root, #app {
 #app .applicationTitle {
   width: 600px;
   height: 0;
-  color: white;
-  font-size: 25px;
-  border-bottom: 35px solid #5c5656;
+  border-bottom: 35px solid #403d3d;
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
   text-align: center;
+  position: relative;
+}
+
+#app .applicationTitle p {
+  width: 300px;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 5px;
+  left: 150px;
 }
 
 #app .section {
@@ -53,7 +64,7 @@ html, body, #root, #app {
   width: 100%;
   height: 25px;
   color: white;
-  margin-bottom: 5px;
+  background-color: #3a3939;
 }
 
 #app .view {
@@ -67,7 +78,6 @@ html, body, #root, #app {
   position: absolute;
   top: 140px;
   left: 175px;
-  display: none;
 }
 
 #app .redPoint {
@@ -82,25 +92,29 @@ html, body, #root, #app {
 }
 
 #app .controls {
-  width: 98%;
-  margin-left: 1%;
+  width: 100%;
   height: 36px;
   position: absolute;
-  bottom: 1%;
+  bottom: 0;
   display: flex;
   align-items: center;
   flex-direction: row;
+  background-color: #3a3939;
 }
 
 #app .controls .controlsBtn {
   width: 36px;
   height: 36px;
-  border-radius: 25%;
   cursor: pointer;
-  margin-left: 5px;
+  border: none;
+  background-color: #3a3939;
+}
+
+#camera .controls .btnClicked {
+  background-color: rgb(122, 122, 122);
 }
 
 #app .controls img {
-  width: 20px;
-  width: 20px;
+  width: 16px;
+  height: 16px;
 }

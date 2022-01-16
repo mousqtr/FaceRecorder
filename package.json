@@ -13,7 +13,6 @@
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.6",
     "react-scripts": "3.4.3",
-    "react-webcam": "^5.2.0",
     "redux": "^4.1.2"
   },
   "scripts": {
