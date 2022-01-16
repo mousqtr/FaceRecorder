@@ -99,9 +99,7 @@ const Simulation = (props, ref) => {
                     loadFinishRef.current = true;
                     loadingRef.current.style.display = 'none';
                     if (recordRef.current) {     
-                        console.log('record');
                         dispatch(recognitionActions.addFrame(face[0].scaledMesh));
-
                         redPointRef.current.style.display = 'block';
                     } else {
                         redPointRef.current.style.display = 'none';

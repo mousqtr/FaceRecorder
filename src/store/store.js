@@ -19,5 +19,9 @@ export default configureStore({
   reducer: {
     recognition: recognitionReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    immutableCheck: false,
+    serializableCheck: false
+  }),
   devTools: devTools_
 })
