@@ -6,6 +6,7 @@ import { drawFrame } from "./../../utilities";
 
 import "./Timelines.css";
 
+import trash from './../../assets/trash.png';
 
 import * as recognitionActions      from './../../store/features/recognition';
 import * as recognitionSelectors    from './../../store/selectors/recognition';
@@ -46,12 +47,17 @@ const Timelines = (props, ref) => {
             <div className="title center">Timelines</div>
             <div className="view">
                 <div className="piste">
-                <div className="pisteName center">Piste 1</div>
-                <div className="timeline">
-                    <div ref={timelineRef} className="timelineOut" onClick={(e) => handleTimeline(e)} style={{width: timelineWidth}}>
-                    <div className="timelineIn" style={{width: timelinePosition+'px'}}></div>
+                    <div className="pisteName center">Piste 1</div>
+                    <div className="timeline">
+                        <div ref={timelineRef} className="timelineOut" onClick={(e) => handleTimeline(e)} style={{width: timelineWidth}}>
+                        <div className="timelineIn" style={{width: timelinePosition+'px'}}></div>
+                        </div>
                     </div>
-                </div>
+                    <button
+                        className="center"                 
+                        onClick={handleTimeline}>
+                            <img src={trash} type="button" alt="trash" />
+                    </button>
                 </div>
             </div>
         </div>

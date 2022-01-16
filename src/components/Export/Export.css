@@ -3,6 +3,10 @@
     padding: 10px;
 }
 
+#export .block {
+    margin-bottom: 10px;
+}
+
 #export h3 {
     font-size: 12px;
     width: 100%;
@@ -12,12 +16,12 @@
     margin: 0;
 }
 
-#export .informations {
+#export .parameters {
     background-color: #343434;
-    margin-bottom: 10px;
+    height: 200px;
 }
 
-#export .configurations {
+#export .actions {
     background-color: #343434;
 }
 
@@ -25,14 +29,10 @@
     padding: 10px;
 }
 
-#export .piste input {
+#export .piste select {
     width: 50px;
-    height: 25px;
-}
-
-#export .size input {
-    width: 50px;
-    height: 25px;
+    height: 22px;
+    font-size: 15px;
 }
 
 
@@ -41,6 +41,9 @@
     height: 25px;
     margin-top: 5px;
     margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 }
 
 #export label {
@@ -52,19 +55,22 @@
 
 #export .filename input {
     width: 200px;
-    height: 25px;
+    height: 22px;
+    font-size: 15px;
 }
 
 #export .type input {
     margin-right: 10px;
 }
 
-#export .exportBtn {
+#export .actions button {
     border: 1px solid white;
     padding: 2px;
     width: 100px;
-    height: 30px;
+    height: 29px;
     background-color: #746e6e;
     color: white;
     float: right;
+    font-size: 15px;
+    margin-left: 10px;
 }

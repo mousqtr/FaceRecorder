@@ -46,23 +46,15 @@ export default function Export () {
             <div className="title center">Export</div>
             <div className="view">
 
-            <div className="informations">
-                <h3 className="center">Informations</h3>
+            <div className="block parameters">
+                <h3 className="center">Parameters</h3>
                 <div className="content">
                     <div className="setting piste">
                         <label for="piste">Piste</label>
-                        <input name="piste" disabled></input>             
+                        <select>
+                            <option>1</option>
+                        </select>           
                     </div>
-                    <div className="setting size">
-                        <label for="size">Size</label>
-                        <input name="size" disabled></input>             
-                    </div>
-                </div>
-            </div>
-
-            <div className="configurations">
-                <h3 className="center">Configurations</h3>
-                <div className="content">
                     <div className="setting filename">
                         <label for="filename">Filename</label>
                         <input name="filename"/>
@@ -72,10 +64,19 @@ export default function Export () {
                         <input type="checkbox" name="json"></input>
                         <label for="json">JSON</label>
                     </div>
+                </div>
+            </div>
+
+            <div className="block actions">
+                <h3 className="center">Actions</h3>
+                <div className="content">
                     <div className="setting">
-                    <button className="exportBtn">
-                        Export
-                    </button>
+                        <button>
+                            Export
+                        </button>
+                        <button>
+                            Reset
+                        </button>
                     </div>
                 </div>
             </div>
