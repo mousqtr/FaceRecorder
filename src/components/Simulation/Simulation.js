@@ -78,22 +78,20 @@ const Simulation = (props, ref) => {
     };
 
     const detect = async (net) => {
+
+        const videoWidth = webcamRef.current.videoWidth;
+        const videoHeight = webcamRef.current.videoHeight;
+        webcamRef.current.width = videoWidth;
+        webcamRef.current.height = videoHeight;
+        canvasRef.current.width = videoWidth;
+        canvasRef.current.height = videoHeight;
+
         if (typeof webcamRef.current !== "undefined" &&
             webcamRef.current !== null &&
             webcamRef.current.readyState === 4) {
 
                 // Get Video Properties
                 const video = webcamRef.current;
-                const videoWidth = webcamRef.current.videoWidth;
-                const videoHeight = webcamRef.current.videoHeight;
-
-                // Set video width
-                webcamRef.current.width = videoWidth;
-                webcamRef.current.height = videoHeight;
-
-                // Set canvas width
-                canvasRef.current.width = videoWidth;
-                canvasRef.current.height = videoHeight;
 
                 // Make Detections
                 const face = await net.estimateFaces({input:video});
@@ -102,7 +100,6 @@ const Simulation = (props, ref) => {
                     loadingRef.current.style.display = 'none';
                     if (recordRef.current) {    
                         data.push(face[0].scaledMesh);
-                        // dispatch(recognitionActions.addFrame(face[0].scaledMesh));
                         redPointRef.current.style.display = 'block';
                     } else {
                         redPointRef.current.style.display = 'none';

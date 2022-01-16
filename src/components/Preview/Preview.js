@@ -26,6 +26,9 @@ const Preview = (props, ref) => {
     const { webcamRef, previewRef } = ref;
 
     const handlePlay = () => {
+        const videoWidth = webcamRef.current.videoWidth;
+        const videoHeight = webcamRef.current.videoHeight;
+
         if (!isPreviewPlay && selectedTrack > -1) {
             dispatch(recognitionActions.setPreviewPlay(true));
             let index = tracks[selectedTrack].timelinePosition;
@@ -33,8 +36,6 @@ const Preview = (props, ref) => {
                 if (tracks[selectedTrack].data.length > index) {
                     let payload = {index: selectedTrack, timelinePosition: index};
                     dispatch(recognitionActions.setTimelinePosition(payload));
-                    const videoWidth = webcamRef.current.videoWidth;
-                    const videoHeight = webcamRef.current.videoHeight;
                     previewRef.current.width = videoWidth;
                     previewRef.current.height = videoHeight;
                     const ctx = previewRef.current.getContext("2d");
