@@ -9,7 +9,7 @@ import * as recognitionSelectors    from './../../store/selectors/recognition';
 
 export default function Export () {
 
-    const frames = useSelector(recognitionSelectors.getFrames);
+    const tracks = useSelector(recognitionSelectors.getTracks);
 
     const downloadFile = ({ data, fileName, fileType }) => {
         const blob = new Blob([data], { type: fileType });
@@ -26,11 +26,11 @@ export default function Export () {
     }
     
     const handleExportJSON = (event) => {
-        console.log(frames);
+        console.log(tracks[0]);
         event.preventDefault()
     
         let dataToExport = [];
-        frames.forEach(element => {
+        tracks[0].forEach(element => {
             dataToExport.push(element);
         });
     
@@ -49,20 +49,20 @@ export default function Export () {
             <div className="block parameters">
                 <h3 className="center">Parameters</h3>
                 <div className="content">
-                    <div className="setting piste">
-                        <label for="piste">Piste</label>
+                    <div className="setting track">
+                        <label>Track</label>
                         <select>
                             <option>1</option>
                         </select>           
                     </div>
                     <div className="setting filename">
-                        <label for="filename">Filename</label>
+                        <label>Filename</label>
                         <input name="filename"/>
                     </div>
                     <div className="setting type">
-                        <label for="type">Type</label>
+                        <label>Type</label>
                         <input type="checkbox" name="json"></input>
-                        <label for="json">JSON</label>
+                        <label>JSON</label>
                     </div>
                 </div>
             </div>

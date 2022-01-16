@@ -10,4 +10,6 @@ export const getTimelineWidth = (state) => state.recognition.timelineWidth;
 
 export const getTimelinePosition = (state) => state.recognition.timelinePosition;
 
-export const getFrames = (state) => state.recognition.frames;
+export const getTracks = (state) => state.recognition.tracks;
+
+export const getSelectedTrack = (state) => state.recognition.selectedTrack;

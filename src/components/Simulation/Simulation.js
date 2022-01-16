@@ -25,8 +25,9 @@ const Simulation = (props, ref) => {
 
     const isSimulationPlay   = useSelector(recognitionSelectors.getSimulationPlay);
     const isSimulationRecord = useSelector(recognitionSelectors.getSimulationRecord);
-    const frames             = useSelector(recognitionSelectors.getFrames);
     const isWebcamPlay       = useSelector(recognitionSelectors.getWebcamPlay);
+    const selectedTrack      = useSelector(recognitionSelectors.getSelectedTrack);
+    const tracks             = useSelector(recognitionSelectors.getTracks);
 
     const { webcamRef, canvasRef } = ref;
     const loadingRef = useRef(null);
@@ -49,7 +50,7 @@ const Simulation = (props, ref) => {
     }
 
     const handleRecord = () => {
-        if (!isSimulationRecord) {
+        if (!isSimulationRecord && selectedTrack !== -1) {
             dispatch(recognitionActions.setSimulationRecord(true));
             recordRef.current = true;
         }
@@ -58,7 +59,7 @@ const Simulation = (props, ref) => {
     const handleSave = () => {
         if (isSimulationRecord) {
             dispatch(recognitionActions.setSimulationRecord(false));
-            dispatch(recognitionActions.setTimelineWidth(frames.length + "px"));
+            dispatch(recognitionActions.setTimelineWidth(tracks[selectedTrack].length + "px"));
             recordRef.current = false;
         }
     }

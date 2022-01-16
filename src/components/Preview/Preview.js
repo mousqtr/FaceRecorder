@@ -20,25 +20,26 @@ const Preview = (props, ref) => {
     const dispatch = useDispatch();
 
     const isPreviewPlay     = useSelector(recognitionSelectors.getPreviewPlay);
-    const frames            = useSelector(recognitionSelectors.getFrames);
     const timelinePosition  = useSelector(recognitionSelectors.getTimelinePosition);
+    const selectedTrack     = useSelector(recognitionSelectors.getSelectedTrack);
+    const tracks            = useSelector(recognitionSelectors.getTracks);
 
     const { webcamRef, previewRef } = ref;
 
     const handlePlay = () => {
-        if (!isPreviewPlay) {
+        if (!isPreviewPlay && selectedTrack > -1) {
             dispatch(recognitionActions.setPreviewPlay(true));
             console.log(timelinePosition);
             let index = timelinePosition;
             interval = setInterval(() => {
-                if (frames.length > index) {
+                if (tracks[selectedTrack].length > index) {
                     dispatch(recognitionActions.setTimelinePosition(index));
                     const videoWidth = webcamRef.current.videoWidth;
                     const videoHeight = webcamRef.current.videoHeight;
                     previewRef.current.width = videoWidth;
                     previewRef.current.height = videoHeight;
                     const ctx = previewRef.current.getContext("2d");
-                    drawFrame(frames[index], ctx);
+                    drawFrame(tracks[selectedTrack][index], ctx);
                     index++;
                 }
             }, 100);
