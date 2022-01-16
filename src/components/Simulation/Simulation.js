@@ -18,6 +18,7 @@ import * as recognitionSelectors    from './../../store/selectors/recognition';
 
 
 var interval;
+var data = [];
 
 const Simulation = (props, ref) => {
 
@@ -51,7 +52,6 @@ const Simulation = (props, ref) => {
     }
 
     const handleRecord = () => {
-        console.log(loadFinishRef)
         if (!isSimulationRecord && selectedTrack > -1 && loadFinishRef.current) {
             dispatch(recognitionActions.setSimulationRecord(true));
             recordRef.current = true;
@@ -60,10 +60,12 @@ const Simulation = (props, ref) => {
 
     const handleSave = () => {
         if (isSimulationRecord) {
+            dispatch(recognitionActions.addFrames(data));
             dispatch(recognitionActions.setSimulationRecord(false));
-            let payload = {index: selectedTrack, timelineWidth: tracks[selectedTrack].data.length + "px"}
+            let payload = {index: selectedTrack, timelineWidth: data.length + "px"}
             dispatch(recognitionActions.setTimelineWidth(payload));
             recordRef.current = false;
+            data = [];
         }
     }
     
@@ -98,8 +100,9 @@ const Simulation = (props, ref) => {
                 if (face.length > 0) {
                     loadFinishRef.current = true;
                     loadingRef.current.style.display = 'none';
-                    if (recordRef.current) {     
-                        dispatch(recognitionActions.addFrame(face[0].scaledMesh));
+                    if (recordRef.current) {    
+                        data.push(face[0].scaledMesh);
+                        // dispatch(recognitionActions.addFrame(face[0].scaledMesh));
                         redPointRef.current.style.display = 'block';
                     } else {
                         redPointRef.current.style.display = 'none';

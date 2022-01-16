@@ -56,6 +56,13 @@ const { actions, reducer } = createSlice({
                 state.tracks[state.selectedTrack].data.push(action.payload);
             }
         },
+        addFrames: (state, action) => {
+            if (state.selectedTrack > -1 
+                && state.selectedTrack < state.tracks.length
+                && state.tracks[state.selectedTrack]) {
+                    state.tracks[state.selectedTrack].data = state.tracks[state.selectedTrack].data.concat(action.payload);
+            }
+        },
         setSelectedTrack: (state, action) => {
             if (state.tracks.length > action.payload) {
                 state.selectedTrack = action.payload
@@ -74,6 +81,7 @@ export const {
     addTrack,
     removeTrack,
     addFrame,
+    addFrames,
     setSelectedTrack
 } = actions;
 

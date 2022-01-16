@@ -28,7 +28,6 @@ const Preview = (props, ref) => {
     const handlePlay = () => {
         if (!isPreviewPlay && selectedTrack > -1) {
             dispatch(recognitionActions.setPreviewPlay(true));
-            console.log(tracks[selectedTrack].timelinePosition);
             let index = tracks[selectedTrack].timelinePosition;
             interval = setInterval(() => {
                 if (tracks[selectedTrack].data.length > index) {
