@@ -25,7 +25,6 @@ const Preview = (props, ref) => {
 
     const { webcamRef, previewRef } = ref;
 
-
     const handlePlay = () => {
         if (!isPreviewPlay) {
             dispatch(recognitionActions.setPreviewPlay(true));

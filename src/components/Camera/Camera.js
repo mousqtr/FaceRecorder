@@ -28,9 +28,7 @@ const Camera = (props, ref) => {
             navigator.mediaDevices.getUserMedia({video: true, audio: false}).then( stream => {
                 setVideoStream(stream);
                 ref.current.srcObject = stream;
-                console.log(ref.current)
                 ref.current.addEventListener("loadedmetadata", () => {
-                    console.log("Load meta data");
                     setLoading(false);
                     ref.current.play();
                 });
@@ -45,6 +43,7 @@ const Camera = (props, ref) => {
                 track.stop();
                 videoStream.removeTrack(track);
             });
+            ref.current.srcObject = undefined;
             setVideoStream(undefined);
         }
     }

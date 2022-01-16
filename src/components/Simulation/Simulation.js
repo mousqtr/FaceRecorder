@@ -26,6 +26,7 @@ const Simulation = (props, ref) => {
     const isSimulationPlay   = useSelector(recognitionSelectors.getSimulationPlay);
     const isSimulationRecord = useSelector(recognitionSelectors.getSimulationRecord);
     const frames             = useSelector(recognitionSelectors.getFrames);
+    const isWebcamPlay       = useSelector(recognitionSelectors.getWebcamPlay);
 
     const { webcamRef, canvasRef } = ref;
     const loadingRef = useRef(null);
@@ -33,7 +34,7 @@ const Simulation = (props, ref) => {
     const redPointRef = useRef(false);
 
     const handlePlay = () => {
-        if (!isSimulationPlay) {
+        if (!isSimulationPlay && isWebcamPlay) {
             dispatch(recognitionActions.setSimulationPlay(true));
             runFacemesh();
             loadingRef.current.style.display = 'block';
