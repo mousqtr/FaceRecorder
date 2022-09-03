@@ -6,7 +6,7 @@ import { drawFrame } from "./../../utilities";
 
 import "./Timelines.css";
 
-import trash from './../../assets/trash.png';
+import { BsFillTrashFill } from 'react-icons/bs';
 
 import * as recognitionActions      from './../../store/features/recognition';
 import * as recognitionSelectors    from './../../store/selectors/recognition';
@@ -48,10 +48,15 @@ const Timelines = (props, ref) => {
 
     const handleNew = () => {
         dispatch(recognitionActions.addTrack());
+        dispatch(recognitionActions.setSelectedTrack(tracks.length));
     }
 
     const handleDelete = (pindex) => {
         dispatch(recognitionActions.removeTrack(pindex));
+    }
+
+    const handleReset = () => {
+        dispatch(recognitionActions.resetTracks());
     }
 
     return (
@@ -64,21 +69,24 @@ const Timelines = (props, ref) => {
                         onClick={handleNew}>
                             New
                     </button>
+                    <button
+                        className="center"                 
+                        onClick={handleReset}>
+                            Reset
+                    </button>
                 </div>
                 <div className="content">
                 {
                     tracks.map((track, index) => 
-                        <div key={index} className="track" onClick={() => handleSelectTrack(index)} style={{backgroundColor: (selectedTrack === index) ? '#525252' : 'inherit'}}>
+                        <div key={index} className="track" onClick={() => handleSelectTrack(index)} style={{backgroundColor: (selectedTrack === index) ? 'rgb(60 60 60)' : 'inherit'}}>
                             <div className="trackName center">Track {index + 1}</div>
                             <div className="timeline">
                                 <div ref={timelineRef} className="timelineOut" onClick={(e) => handleTimeline(e)} style={{width: track.timelineWidth}}>
                                 <div className="timelineIn" style={{width: track.timelinePosition+'px'}}></div>
                                 </div>
                             </div>
-                            <button
-                                className="center"                 
-                                onClick={() => handleDelete(index)}>
-                                    <img src={trash} type="button" alt="trash" />
+                            <button className="center">
+                                <BsFillTrashFill onClick={() => handleDelete(index)} />
                             </button>
                         </div>
                     )

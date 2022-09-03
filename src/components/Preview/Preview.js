@@ -6,8 +6,7 @@ import { drawFrame } from "./../../utilities";
 
 import "./Preview.css";
 
-import play     from './../../assets/play.png';
-import pause    from './../../assets/pause.png';
+import { BsFillPlayFill, BsFillPauseFill } from 'react-icons/bs';
 
 import * as recognitionActions      from './../../store/features/recognition';
 import * as recognitionSelectors    from './../../store/selectors/recognition';
@@ -73,19 +72,9 @@ const Preview = (props, ref) => {
             <div className="title center">Preview</div>
             <canvas ref={previewRef} className="view"/>
             <div className="controls center">
-                {
-                    (!isPreviewPlay) ? 
-                    <button
-                        className="center"
-                        onClick={handlePlay}>
-                            <img src={play} type="button" alt="play" />
-                    </button> : 
-                    <button
-                        className="center"                 
-                        onClick={handlePause}>
-                            <img src={pause} type="button" alt="pause" />
-                    </button>
-                }
+                <div className="center controls-btn">
+                    { (!isPreviewPlay) ? <BsFillPlayFill onClick={handlePlay} /> : <BsFillPauseFill onClick={handlePause} />}
+                </div>
             </div>
         </div>
     );

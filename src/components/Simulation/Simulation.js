@@ -2,15 +2,13 @@ import React, { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 
-
 import { drawMesh } from "./../../utilities";
 
 import "./Simulation.css";
 
-import play     from './../../assets/play.png';
-import pause    from './../../assets/pause.png';
-import record   from './../../assets/record.png';
-import save     from './../../assets/save.png';
+import { BsFillPlayFill, BsFillPauseFill, BsFillRecordFill, BsFillSave2Fill } from 'react-icons/bs';
+import { IoIosSquare } from 'react-icons/io';
+
 import rolling  from './../../assets/rolling.gif';
 
 import * as recognitionActions      from './../../store/features/recognition';
@@ -28,7 +26,6 @@ const Simulation = (props, ref) => {
     const isSimulationRecord = useSelector(recognitionSelectors.getSimulationRecord);
     const isWebcamPlay       = useSelector(recognitionSelectors.getWebcamPlay);
     const selectedTrack      = useSelector(recognitionSelectors.getSelectedTrack);
-    const tracks             = useSelector(recognitionSelectors.getTracks);
     const isSimulationStop   = useSelector(recognitionSelectors.getSimulationStop);
 
     const { webcamRef, canvasRef } = ref;
@@ -127,32 +124,12 @@ const Simulation = (props, ref) => {
             <div className="title center">Simulation</div>
             <canvas ref={canvasRef} className="view"/>
             <div className="controls center">
-                {
-                    (!isSimulationPlay) ? 
-                    <button
-                        className="center"
-                        onClick={handlePlay}>
-                            <img src={play} type="button" alt="play" />
-                    </button> : 
-                    <button
-                        className="center"                 
-                        onClick={handlePause}>
-                            <img src={pause} type="button" alt="pause" />
-                    </button>
-                }
-                {
-                    (!isSimulationRecord) ? 
-                    <button
-                        className="center"
-                        onClick={handleRecord}>
-                            <img src={record} type="button" alt="play" />
-                    </button> : 
-                    <button
-                        className="center"                 
-                        onClick={handleSave}>
-                            <img src={save} type="button" alt="save" />
-                    </button>
-                }
+                <div className="center controls-btn">
+                    { (!isSimulationPlay) ? <BsFillPlayFill onClick={handlePlay} /> : <BsFillPauseFill onClick={handlePause} />}
+                </div>
+                <div className="center controls-btn">
+                    { (!isSimulationRecord) ? <BsFillRecordFill onClick={handleRecord} /> : <IoIosSquare onClick={handleSave} />}
+                </div>
             </div>
             <img ref={loadingRef} src={rolling} type="button" alt="rolling" className="rolling"/>
             <div ref={redPointRef} className="redPoint"></div>

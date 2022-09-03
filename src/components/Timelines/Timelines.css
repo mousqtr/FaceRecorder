@@ -62,7 +62,12 @@
     border: none;
 }
 
-#timelines .track img {
+#timelines .track svg {
     width: 20px;
     height: 20px;
+    color: white;
+}
+
+#timelines .track svg:hover {
+    color: red;
 }

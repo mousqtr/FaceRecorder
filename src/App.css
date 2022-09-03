@@ -98,12 +98,12 @@ html, body, #root, #app {
   border: none;
   color: white;
   font-size: 14px;
-  background-color: #5e00b5;
+  background-color: #555456;
   border-right: 1px solid white;
 }
 
 #app .view .toolsBar button:hover {
-  background-color: #8a33db;
+  background-color: green;
 }
 
 #app .view .content {
@@ -156,16 +156,20 @@ html, body, #root, #app {
   background-color: #3a3939;
 }
 
-#app .controls button {
+#app .controls .controls-btn {
   width: 36px;
   height: 36px;
-  cursor: pointer;
-  border: none;
-  background-color: #3a3939;
 }
 
-#app .controls button:hover {
-  background-color: #5e00b5;
+#app .controls .controls-btn svg {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  color: white;
+}
+
+#app .controls .controls-btn svg:hover {
+  color: green;
 }
 
 #camera .controls .btnClicked {

@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "./Camera.css";
 
-import play     from './../../assets/play.png';
-import pause    from './../../assets/pause.png';
 import rolling  from './../../assets/rolling.gif';
 
 import * as recognitionActions      from './../../store/features/recognition';
 import * as recognitionSelectors    from './../../store/selectors/recognition';
+
+import { BsFillPlayFill, BsFillPauseFill } from 'react-icons/bs';
 
 
 
@@ -56,19 +56,9 @@ const Camera = (props, ref) => {
                 ref={ref}>
             </video> 
             <div className="controls center">
-                {
-                    (!isWebcamPlay) ? 
-                    <button
-                        className="center"
-                        onClick={handlePlay}>
-                            <img src={play} type="button" alt="play" />
-                    </button> : 
-                    <button
-                        className="center"                 
-                        onClick={handlePause}>
-                            <img src={pause} type="button" alt="pause" />
-                    </button>
-                }               
+                <div className="center controls-btn">
+                    { (!isWebcamPlay) ? <BsFillPlayFill onClick={handlePlay} /> : <BsFillPauseFill onClick={handlePause} />}
+                </div>         
             </div>
             {
                 (isLoading) ? <img src={rolling} type="button" alt="rolling" className="rolling"/> : <></>

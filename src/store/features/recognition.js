@@ -51,6 +51,10 @@ const { actions, reducer } = createSlice({
                 }
             }
         },
+        resetTracks: (state, action) => {
+            state.tracks = [];
+            state.selectedTrack = -1;
+        },
         addFrame: (state, action) => {
             if (state.selectedTrack > -1 
                 && state.selectedTrack < state.tracks.length
@@ -88,6 +92,7 @@ export const {
     setTimelinePosition,
     addTrack,
     removeTrack,
+    resetTracks,
     addFrame,
     addFrames,
     setSelectedTrack,
