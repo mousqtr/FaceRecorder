@@ -59,12 +59,12 @@ const Camera = (props, ref) => {
                 {
                     (!isWebcamPlay) ? 
                     <button
-                        className="controlsBtn center"
+                        className="center"
                         onClick={handlePlay}>
                             <img src={play} type="button" alt="play" />
                     </button> : 
                     <button
-                        className="controlsBtn center"                 
+                        className="center"                 
                         onClick={handlePause}>
                             <img src={pause} type="button" alt="pause" />
                     </button>

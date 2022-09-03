@@ -1,21 +1,3 @@
-#timelines .view {
-    background-color: #403d3d;
-    overflow-y: auto;
-}
-
-#timelines .view::-webkit-scrollbar {
-    width: 5px;
-}
-
-#timelines .view::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-}
-
-#timelines .view::-webkit-scrollbar-thumb {
-    background-color: #746e6e;
-    border-radius: 25px;
-}
-
 #timelines .track {
     width: 100%;
     height: 60px;
@@ -83,20 +65,4 @@
 #timelines .track img {
     width: 20px;
     height: 20px;
-}
-
-#timelines .toolsBar {
-    width: 100%;
-    height: 20px;
-    background-color: #343434;
-}
-
-#timelines .toolsBar button {
-    width: 80px;
-    height: 100%;
-    float: left;
-    background-color: inherit;
-    border: none;
-    color: white;
-    font-size: 14px;
 }

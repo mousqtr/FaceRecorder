@@ -65,6 +65,7 @@ const Timelines = (props, ref) => {
                             New
                     </button>
                 </div>
+                <div className="content">
                 {
                     tracks.map((track, index) => 
                         <div key={index} className="track" onClick={() => handleSelectTrack(index)} style={{backgroundColor: (selectedTrack === index) ? '#525252' : 'inherit'}}>
@@ -82,7 +83,7 @@ const Timelines = (props, ref) => {
                         </div>
                     )
                 }
-                
+                </div>
             </div>
         </div>
     );

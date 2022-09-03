@@ -47,6 +47,12 @@ export default function Export () {
         }
     }
 
+    const handleReset = () => {
+        setFilename('');
+        setNumTrack('');
+        setType('');
+    }
+
     const handleChangeType = (event) => {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -61,9 +67,13 @@ export default function Export () {
         <div id="export" className="section square">
             <div className="title center">Export</div>
             <div className="view">
-
-            <div className="block parameters">
-                <h3 className="center">Parameters</h3>
+                <div className="toolsBar">
+                    <button
+                        className="center"                 
+                        onClick={handleReset}>
+                            Reset
+                    </button>
+                </div>
                 <div className="content">
                     <div className="setting track">
                         <label>Track</label>
@@ -94,25 +104,15 @@ export default function Export () {
                         </input>
                         <label>JSON</label>
                     </div>
-                </div>
-            </div>
-
-            <div className="block actions">
-                <h3 className="center">Actions</h3>
-                <div className="content">
-                    <div className="setting">
-                        <button onClick={handleExport}>
-                            Export
-                        </button>
-                        <button>
-                            Reset
+                    <div className="setting actions">
+                        <label>Actions</label>
+                        <button
+                            className="center"                 
+                            onClick={handleExport}>
+                                Export
                         </button>
                     </div>
                 </div>
-            </div>
-            
-
-            
             </div>
         </div>
     )
