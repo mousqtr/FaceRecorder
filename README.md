@@ -17,4 +17,4 @@
 
 ## Preview
 
-<img src="/assets/preview.png?raw=true" alt="preview" style="width: 400px;"/>
+<img src="/assets/preview.jpg?raw=true" alt="preview" style="width: 400px;"/>
